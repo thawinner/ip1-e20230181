@@ -3,7 +3,7 @@
 Checklist and "explain your design" answers for each milestone. Each milestone is due at the end of its week and submitted as a Git tag (`m0`, `m1`, …).
 
 ## Overview
-- [ ] M0 Proposal (week 3)
+- [x] M0 Proposal (week 3)
 - [ ] M1 Frontend prototype (week 5)
 - [ ] M2 Backend API (week 7)
 - [ ] M3 Integrated app (week 9)
@@ -12,17 +12,17 @@ Checklist and "explain your design" answers for each milestone. Each milestone i
 - [ ] Final presentation and defence (week 16, code frozen at tag `final` end of week 15)
 
 ## M0 Proposal (week 3)
-- [ ] `PROPOSAL.md` follows the template in Appendix A
-- [ ] Problem stated in two sentences; target users and at least 2 roles named
-- [ ] 6–10 user stories, with acceptance criteria for the 3 most important
-- [ ] MVP scope split into must-have and nice-to-have
-- [ ] Entity list with main attributes and relations; at least 3 entities
-- [ ] Chosen stretch feature named
-- [ ] Tagged `m0`
+- [x] `PROPOSAL.md` follows the template in Appendix A
+- [x] Problem stated in two sentences; target users and at least 2 roles named
+- [x] 6–10 user stories, with acceptance criteria for the 3 most important
+- [x] MVP scope split into must-have and nice-to-have
+- [x] Entity list with main attributes and relations; at least 3 entities
+- [x] Chosen stretch feature named
+- [x] Tagged `m0`
 
 **Which story did you cut from the MVP, and why?**
 
-TODO
+I cut stock counts that storekeepers submit and the manager approves. They needed a sixth entity (StockCount), two more screens and a second approval flow next to write-offs, which is too much for one person in the time we have. The manager now adjusts stock directly after counting a product, with a note (story 8), so the counts can still be corrected.
 
 ## M1 Frontend prototype (week 5)
 - [ ] Wireframes (photo or tool) of the main screens in `docs/`

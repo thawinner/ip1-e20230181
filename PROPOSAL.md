@@ -37,7 +37,7 @@ Cut from the MVP: stock counts that storekeepers submit and the manager approves
 ## Entities
 | Entity | Main attributes | Relations |
 |---|---|---|
-| User | fullName, username, phone, passwordHash, role (STAFF, MANAGER), isActive, mustChangePassword, createdAt | has many StockMovements |
+| User | fullName, username, phone, passwordHash, role (STAFF, MANAGER), isActive, mustChangePassword, createdAt | has many StockMovements (recorded); has many StockMovements (reviewed, manager) |
 | Category | name, description | has many Products |
 | Supplier | name, phone, email, address | has many Products; has many StockMovements (deliveries) |
 | Product | sku, name, unit, costPrice, quantity, reorderLevel, targetLevel, isActive, imageUrl | belongs to a Category and a Supplier (optional); has many StockMovements |
