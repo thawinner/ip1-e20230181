@@ -19,13 +19,12 @@ One repository for the whole project, following the course guideline:
 ip1-e20230181/
   frontend/              Vue 3 app (Vite + TypeScript, Vue Router, Pinia)
   backend/               NestJS API (one module per resource, with prisma/ for schema, migrations, seed)
-  docs/                  SPEC, wireframes, ERD, API contract (api.md), screenshots
+  docs/                  SPEC (detailed spec), wireframes, ERD, API contract (api.md), screenshots
     wireframes/          sketches of the main screens
   docker-compose.yml     whole stack: frontend, backend, PostgreSQL (by M5)
   .github/workflows/     ci.yml: lint, tests and build on every push (by M5)
   PROPOSAL.md            M0 proposal (guideline Appendix A)
-  MILESTONES.md          "explain your design" answers for each milestone
-  CHECK.md               checklist progress per milestone
+  MILESTONES.md          M0–M5 checklists and "explain your design" answers
   DECISIONS.md           design decisions and why
   AI_LOG.md              log of AI tool use
   README.md
@@ -34,8 +33,11 @@ ip1-e20230181/
 Secrets live in `backend/.env` (git-ignored); `backend/.env.example` holds placeholder values.
 
 ## Docs
-- User stories: [docs/SPEC.md](docs/SPEC.md)
+- Proposal (problem, roles, user stories, MVP, entities): [PROPOSAL.md](PROPOSAL.md)
+- Detailed specification (full acceptance criteria, guard table): [docs/SPEC.md](docs/SPEC.md)
 - Wireframes: [docs/wireframes/](docs/wireframes/)
+- Milestones checklist and design answers: [MILESTONES.md](MILESTONES.md)
+- Course guideline: [docs/Project Guideline.pdf](<docs/Project Guideline.pdf>)
 
 ## How to run
 Coming soon.
