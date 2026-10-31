@@ -25,12 +25,18 @@ Checklist and "explain your design" answers for each milestone. Each milestone i
 I cut stock counts that storekeepers submit and the manager approves. They needed a sixth entity (StockCount), two more screens and a second approval flow next to write-offs, which is too much for one person in the time we have. The manager now adjusts stock directly after counting a product, with a note (story 8), so the counts can still be corrected.
 
 ## M1 Frontend prototype (week 5)
-- [ ] Wireframes (photo or tool) of the main screens in `docs/`
-- [ ] Vue 3 + TypeScript app created with Vite; strict mode on; ESLint passes
-- [ ] At least 4 routes, including a detail page with a route parameter
-- [ ] At least one form with client-side validation
-- [ ] A Pinia store and a service layer calling a mock API (json-server or local JSON)
-- [ ] Loading, empty and error states visible
+- [ ] Wireframes (photo or tool) of the 3–5 main screens in `docs/wireframes/`
+- [ ] Component tree per screen in `docs/components.md` (components, props, events, who owns each piece of state)
+- [ ] Vue 3 + TypeScript app created with Vite in `frontend/`; strict mode on; ESLint passes
+- [ ] Entities in `src/types.ts`
+- [ ] At least 4 routes, including a detail page with a route parameter, and a 404 page
+- [ ] Route guard for the manager-only pages
+- [ ] At least one form with client-side validation and a message under each field
+- [ ] `db.json` shaped like the real API (one array per entity, linked by ids); `json-server` with an `api` script
+- [ ] A Pinia store and a service layer (`src/api/http.ts` plus one file per resource) calling the mock API
+- [ ] Loading, empty, error and success states visible
+- [ ] README section on how to run it (`npm run api`, `npm run dev`)
+- [ ] Work on the `frontend-setup` branch, merged by pull request
 - [ ] Tagged `m1`
 
 **What state lives in the store and what stays inside a component? Why?**
