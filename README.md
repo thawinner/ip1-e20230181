@@ -20,7 +20,10 @@ ip1-e20230181/
   frontend/              Vue 3 app (Vite + TypeScript, Vue Router, Pinia)
   backend/               NestJS API (one module per resource, with prisma/ for schema, migrations, seed)
   docs/                  SPEC (detailed spec), wireframes, ERD, API contract (api.md), screenshots
-    wireframes/          sketches of the main screens
+    wireframes/          sketches of the main screens (M1)
+    erd/                 database ERD (M2)
+    diagrams/            architecture diagram for the final presentation
+    screenshots/         app screenshots for the README (M5)
   docker-compose.yml     whole stack: frontend, backend, PostgreSQL (by M5)
   .github/workflows/     ci.yml: lint, tests and build on every push (by M5)
   PROPOSAL.md            M0 proposal (guideline Appendix A)
