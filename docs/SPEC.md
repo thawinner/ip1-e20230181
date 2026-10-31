@@ -1,13 +1,13 @@
 # ShopStock — Specification
 
-Storage inventory for a small shop: storekeepers record goods coming into storage and going out to the shop, report losses and count stock; the manager approves write-offs and counts, manages accounts, and sees a reorder list and a monthly report (which can be downloaded) on the dashboard. Everyone has a My profile page.
+Storage inventory for a small shop: storekeepers record goods coming into storage and going out to the shop and report losses, and see their work on their own dashboard; the manager approves write-offs, adjusts stock after a count, manages accounts, and sees a reorder list and a monthly report (which can be downloaded) on the dashboard. Everyone has a My profile page.
 
 ## Roles
 
 | Role | Who | What they can do | Menu (home page first) |
 | --- | --- | --- | --- |
-| Staff | Storekeepers | Search products and see what is left in storage; record deliveries in and goods sent to the shop; record damaged, expired or returned goods, which wait for the manager's approval; count stock in storage; see their own movements and counts with their status. They do not see cost prices, stock value, reports or other staff members' records. Their account is created by the manager, and they set their own password at first login. | Products, Count stock, My movements |
-| Manager | The shop owner or manager | Everything staff can do, plus manage products, categories and suppliers, approve or reject storekeepers' write-offs and counts in one Approvals page (the manager's own are applied at once), see the dashboard with the monthly report (which can be downloaded), the reorder list, all movements, cost prices and stock value, and add, edit, deactivate and reset the password of storekeeper accounts. | Dashboard, Products, Approvals, Reorder list, Movements, Staff, Categories, Suppliers |
+| Staff | Storekeepers | Search products and see what is left in storage; record deliveries in and goods sent to the shop; record damaged, expired or returned goods, which wait for the manager's approval; see their own movements with their status, and a dashboard with their work today and what is running low. They do not see cost prices, stock value, reports or other staff members' records. Their account is created by the manager, and they set their own password at first login. | Dashboard, Products, My movements |
+| Manager | The shop owner or manager | Everything staff can do, plus manage products, categories and suppliers, approve or reject storekeepers' write-offs on the Approvals page (the manager's own are applied at once), adjust stock after counting a product, see the dashboard with the monthly report (which can be downloaded), the reorder list, all movements, cost prices and stock value, and add, edit, deactivate and reset the password of storekeeper accounts. | Dashboard, Products, Approvals, Reorder list, Movements, Staff, Categories, Suppliers |
 
 ## User stories
 
@@ -22,10 +22,10 @@ As a manager, I want to add a storekeeper account so that a new employee can use
 
 ### US-02 · Log in (Both) — Status: Not done
 As a user, I want to log in so that I see the pages for my role.
-- AC1: Correct username and password take staff to /products and a manager to /manager/dashboard; the user stays logged in after a page reload until the 1-hour session ends.
+- AC1: Correct username and password take staff to /dashboard and a manager to /manager/dashboard; the user stays logged in after a page reload until the 1-hour session ends.
 - AC2: A wrong username or a wrong password shows the same message, "Invalid username or password", and no token is stored.
 - AC3: A deactivated account sees "This account is deactivated" and cannot log in.
-- AC4: Staff see only Products, Count stock and My movements in the menu; a manager also sees Dashboard, Approvals, Reorder list, Movements, Staff, Categories and Suppliers. Opening a page of the other role shows a 403 page with a link back to the home page.
+- AC4: Staff see only Dashboard, Products and My movements in the menu; a manager also sees Dashboard, Approvals, Reorder list, Movements, Staff, Categories and Suppliers. Opening a page of the other role shows a 403 page with a link back to the home page.
 - AC5: Any user can change their password with their current password; a wrong current password shows "Current password is incorrect".
 - AC6: Clicking their name in the menu opens My profile: their own name, role, username, phone and date added, a Change password button, and what of theirs needs attention; no other user's phone number is shown.
 
@@ -52,12 +52,13 @@ As a storekeeper, I want to record goods leaving storage so that the stock count
 - AC4: While typing, the form shows the result, for example "Stock after: 8 (now 12)", so mistakes are caught before saving.
 - AC5: DAMAGED, EXPIRED or RETURN_TO_SUPPLIER needs a note ("A note is required for this reason"); a storekeeper's is saved as Pending and changes the quantity only when the manager approves it; a rejection shows its reason.
 
-### US-06 · See my movements (Staff) — Status: Not done
-As a storekeeper, I want to see the movements I recorded so that I can check my work at the end of a shift.
+### US-06 · See my work (Staff) — Status: Not done
+As a storekeeper, I want to see my work and what is running low so that I can check my work at the end of a shift.
 - AC1: My movements page lists only my movements, newest first, with their status (Applied, Pending, Rejected and why), filterable by type and date.
 - AC2: Opening another staff member's movement by URL (/movements/:id) shows the not-found page (the API returns 404).
-- AC3: A movement has no edit or delete button; the page explains that mistakes are fixed by a stock count approved by the manager.
+- AC3: A movement has no edit or delete button; the page explains that mistakes are fixed by the manager's adjustment after a count.
 - AC4: On a product page, staff see its recent movements (date, type, change) without the names of who recorded them.
+- AC5: Staff open on their dashboard (home page): how many movements they recorded today, their write-offs waiting or rejected, the products running low and their last 5 movements, each linking to its page; it shows no cost price or stock value.
 
 ### US-07 · Manage products (Manager) — Status: Not done
 As a manager, I want to add, edit and archive products so that the catalogue matches what the shop keeps in storage.
@@ -67,14 +68,13 @@ As a manager, I want to add, edit and archive products so that the catalogue mat
 - AC4: A product with movements cannot be deleted; the message suggests archiving it instead.
 - AC5: A staff user cannot create, edit or delete products (the API returns 403).
 
-### US-08 · Counts and approvals (Both) — Status: Not done
-As a storekeeper, I want to count stock and report losses, and as a manager, I want to approve them in one place, so that the system matches what is really in storage.
-- AC1: The Count stock page lists products not counted for the longest time first; the count screen shows the product name and unit but not the system quantity, and a storekeeper's count is saved as pending.
-- AC2: The Approvals page shows pending write-offs (product, quantity, reason, note, who) and pending counts (counted, expected, difference, for example 18, 20, −2), with a badge in the menu; approving applies the change, and a count also sets the last-counted date.
-- AC3: Rejecting needs a reason, which the storekeeper sees in their movements or counts; nothing changes in stock.
-- AC4: A second count for a product that already has a pending count is refused with "This product already has a count waiting for approval".
-- AC5: Staff cannot approve; a manager's own counts and write-offs are applied at once; nobody can record an adjustment directly (the API refuses it).
-- Note: hiding the system quantity on the count screen makes the storekeeper really count, but staff still see quantities on the product pages. The real check is the manager's approval of the difference and the manager's own surprise counts of some products each week (CNT-1).
+### US-08 · Approve write-offs and adjust stock (Manager) — Status: Not done
+As a manager, I want to approve storekeepers' write-offs and correct a quantity after counting the shelf, so that the system matches what is really in storage.
+- AC1: The Approvals page shows pending write-offs (product, quantity, reason, note, who), with a badge in the menu; approving applies the change, and stock is checked again ("Not enough stock: only N left").
+- AC2: Rejecting needs a reason ("Please give a reason for rejecting"), which the storekeeper sees in their movements; nothing changes in stock.
+- AC3: On Adjust stock, entering the counted quantity and a note creates an adjustment with the difference (for example counted 18, system 20, change −2); without a note it shows "A note is required for an adjustment".
+- AC4: A count equal to the current quantity is refused with "No difference to adjust"; a negative or decimal count shows "Counted quantity must be 0 or more".
+- AC5: Staff cannot approve write-offs or make an adjustment (the API returns 403); a manager's own write-offs are applied at once.
 
 ### US-09 · Reorder list and monthly report (Manager) — Status: Not done
 As a manager, I want to know what to order and how storage changed this month so that I can reorder in time and see losses.
@@ -98,20 +98,19 @@ Y = allowed · Own = only records the user created (others → 404) · — = 403
 | --- | --- | --- |
 | Log in, see own profile, change own password | Y | Y |
 | View products: name, unit and quantity in storage | Y (active only) | Y (incl. archived) |
-| View cost price, stock value and last-counted date | — | Y |
+| View cost price and stock value | — | Y |
 | Create, update (including cost price), archive, delete products | — | Y |
 | Record deliveries (with supplier and invoice number) and goods sent to the shop | Y | Y |
 | Record write-offs (damaged, expired, returned to supplier) | Y (waits for approval) | Y (applied at once) |
-| Submit a stock count (system quantity hidden) | Y (waits for approval) | Y (applied at once) |
-| Approve or reject write-offs and counts | — | Y (storekeepers') |
-| Record an adjustment directly | — | — (only through a count) |
+| Approve or reject write-offs | — | Y (storekeepers') |
+| Adjust stock after a count (with a note) | — | Y |
 | View movement history | Own | All |
 | See who recorded a movement | Own only | Y |
 | See staff phone numbers | Own only | Y |
 | View categories and suppliers | Y | Y |
 | Manage categories and suppliers | — | Y |
 | Add (register), edit, deactivate, reset password of storekeepers | — | Y (not own account) |
-| Low-stock information | Badge and filter on the product list | Reorder list and badge |
+| Low-stock information | Badge and filter on the product list; running-low list on the dashboard | Reorder list and badge |
 | Monthly report | — | Y |
 
 ## Advanced feature (Check 6): search, filter and pagination
