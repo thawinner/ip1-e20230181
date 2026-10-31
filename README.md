@@ -28,8 +28,6 @@ ip1-e20230181/
   .github/workflows/     ci.yml: lint, tests and build on every push (by M5)
   PROPOSAL.md            M0 proposal (guideline Appendix A)
   MILESTONES.md          M0–M5 checklists and "explain your design" answers
-  DECISIONS.md           design decisions and why
-  AI_LOG.md              log of AI tool use
   README.md
 ```
 
